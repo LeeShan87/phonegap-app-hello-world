@@ -3,89 +3,24 @@
       <head>
          <title>jQuery Mobile Demo</title>
              <link href="jquery.mobile-1.3.2.min.css" rel="stylesheet" type="text/css"/>
-<script src="phonegap.js"></script>
-             
 <script src="jquery-1.7.2.min.js"></script>
-<script src="jquery.mobile-1.3.2.min.js"></script> 
+<script src="jquery.mobile-1.3.2.min.js"></script>
+<script src="phonegap.js"></script> 
 <style>
-#scroll::-webkit-scrollbar { 
-    display: none; 
-}
-#scroll::-webkit-scrollbar-button:vertical { 
-    display: block; 
-}
 </style> 
 <script type="text/javascript" charset="utf-8">
-  var my_media = null;
-        var mediaTimer = null;
+  function getPhoneGapPath() {
 
-        // Play audio
-        //
-        function playAudio(src) {
-            // Create Media object from src
-            my_media = new Media(src, onSuccess, onError);
+    var path = window.location.pathname;
+    path = path.substr( path, path.length - 10 );
+    return 'file://' + path;
 
-            // Play audio
-            my_media.play();
+};
 
-            // Update my_media position every second
-            if (mediaTimer == null) {
-                mediaTimer = setInterval(function() {
-                    // get my_media position
-                    my_media.getCurrentPosition(
-                        // success callback
-                        function(position) {
-                            if (position > -1) {
-                                setAudioPosition((position) + " sec");
-                            }
-                        },
-                        // error callback
-                        function(e) {
-                            console.log("Error getting pos=" + e);
-                            setAudioPosition("Error: " + e);
-                        }
-                    );
-                }, 1000);
-            }
-        }
-
-        // Pause audio
-        // 
-        function pauseAudio() {
-            if (my_media) {
-                my_media.pause();
-            }
-        }
-
-        // Stop audio
-        // 
-        function stopAudio() {
-            if (my_media) {
-                my_media.stop();
-            }
-            clearInterval(mediaTimer);
-            mediaTimer = null;
-        }
-
-        // onSuccess Callback
-        //
-        function onSuccess() {
-            console.log("playAudio():Audio Success");
-        }
-
-        // onError Callback 
-        //
-        function onError(error) {
-            alert('code: '    + error.code    + '\n' + 
-                  'message: ' + error.message + '\n');
-        }
-
-        // Set audio position
-        // 
-        function setAudioPosition(position) {
-            document.getElementById('audio_position').innerHTML = position;
-        }
-
+var snd = new Media( getPhoneGapPath() + '/Resources/sounds/female/0.mp3' );
+function play(){
+snd.play();
+}
 </script>        
        <body>         <!-- Main Page-->         
        <div data-role="page" id="main">             
@@ -96,6 +31,7 @@
        <a data-role="button" href="#page2">Page Navigation</a>                 
        <a data-role="button" href="#list">list view</a>                 
        <a data-role="button" href="#dialog1" data-rel="dialog" data- transition="pop">Open Dialog </a>             
+       <a data-role="button" onclick="play()">play</a>                 
        </div>             <div data-role="footer">                
         <h4>                     Main Page Footer                 </h4>             
         </div>         
