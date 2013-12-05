@@ -55,8 +55,9 @@ var app = {
 
 };
 
-var snd = new Media( getPhoneGapPath() + '/0.mp3' );
-function play(){
+var snd;
+function play(path){
+snd = new Media( getPhoneGapPath() + path );
 snd.play();
 
 
