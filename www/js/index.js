@@ -65,3 +65,7 @@ snd.play();
 function getpath(){
 $("#text").html(getPhoneGapPath());
 } ;
+
+function shakeit(){
+play("0.mp3")
+}
