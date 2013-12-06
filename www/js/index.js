@@ -34,8 +34,7 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
-        var element = document.getElementById('deviceIsReady');
-                element.innerHTML = 'Watching shake movement...';
+       
                 
                 shake.startWatch(onDetected);
     },
