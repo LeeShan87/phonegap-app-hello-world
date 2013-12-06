@@ -34,6 +34,10 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+        var element = document.getElementById('deviceIsReady');
+                element.innerHTML = 'Watching shake movement...';
+                
+                shake.startWatch(onDetected);
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -69,3 +73,11 @@ $("#text").html(getPhoneGapPath());
 function shakeit(){
 play("0.mp3")
 }
+function onDetected() {
+                var element = document.getElementById('shakeData');
+                element.innerHTML = 'It\'s happening! <p><button type="button" onclick="clearShakeData();">Clear</button></p>'
+        }
+        
+        function clearShakeData(){
+                document.getElementById('shakeData').innerHTML = '';
+        }
